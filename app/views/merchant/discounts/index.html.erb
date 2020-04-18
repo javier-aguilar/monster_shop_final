@@ -1,0 +1,12 @@
+<<h1>Discounts</h1>
+
+<section>
+  <% @discounts.each do |discount| %>
+  <section class = "discount-<%= discount.id %>">
+    <p>Code: <%= discount.code %></p>
+    <p>Description: <%= discount.description %></p>
+    <p>Discount: <%= discount.discount %>%</p>
+    <p>Number of Items needed: <%= discount.number_of_items %></p>
+  </section>
+  <% end %>
+</section>
