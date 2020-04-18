@@ -61,5 +61,16 @@ RSpec.describe 'Index Discount Page' do
 
       expect(page).to have_no_link("Edit", href: "/merchant/discounts/#{@discount3.id}")
     end
+    it 'I can also see links to delete discounts' do
+      within(".discount-#{@discount1.id}") do
+        expect(page).to have_link("Delete", href: "/merchant/discounts/#{@discount1.id}")
+      end
+
+      within(".discount-#{@discount2.id}") do
+        expect(page).to have_link("Delete", href: "/merchant/discounts/#{@discount2.id}")
+      end
+
+      expect(page).to have_no_link("Delete", href: "/merchant/discounts/#{@discount3.id}")
+    end
   end
 end
