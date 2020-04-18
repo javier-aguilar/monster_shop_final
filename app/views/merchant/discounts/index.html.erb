@@ -8,6 +8,7 @@
     <p>Description: <%= discount.description %></p>
     <p>Discount: <%= discount.discount %>%</p>
     <p>Number of Items needed: <%= discount.number_of_items %></p>
+    <p><%= link_to "Edit", "/merchant/discounts/#{discount.id}" %></p>
   </section>
   <% end %>
 </section>
