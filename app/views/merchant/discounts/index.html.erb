@@ -3,6 +3,7 @@
 <section>
   <% @discounts.each do |discount| %>
   <section class = "discount-<%= discount.id %>">
+    <h2>Discount #<%= discount.id %></h2>
     <p>Code: <%= discount.code %></p>
     <p>Description: <%= discount.description %></p>
     <p>Discount: <%= discount.discount %>%</p>
