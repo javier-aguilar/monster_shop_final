@@ -39,41 +39,16 @@ RSpec.describe 'Index Discount Page' do
         expect(page).to have_content("Number of Items needed: 10")
       end
 
-      within(".discount-#{@discount2.id}") do
-        expect(page).to have_content("Code: 60OFF")
-        expect(page).to have_content("Description: 60% off 15 items or more")
-        expect(page).to have_content("Discount: 60%")
-        expect(page).to have_content("Number of Items needed: 15")
-      end
-
-      expect(page).to have_no_content("Code: SUMMER10")
-      expect(page).to have_no_content("Description: 10% off 10 items or more")
-      expect(page).to have_no_content("Discount: 10%")
-    end
-    it 'I can see a link to add a discount' do
-      expect(page).to have_link("Create New Discount", href: "/merchant/discounts/new")
-    end
-    it 'I can see links to edit discounts' do
       within(".discount-#{@discount1.id}") do
-        expect(page).to have_link("Edit", href: "/merchant/discounts/#{@discount1.id}")
+        click_link "Delete"
       end
 
-      within(".discount-#{@discount2.id}") do
-        expect(page).to have_link("Edit", href: "/merchant/discounts/#{@discount2.id}")
-      end
+      expect(current_path).to eq(merchant_discounts_path)
 
-      expect(page).to have_no_link("Edit", href: "/merchant/discounts/#{@discount3.id}")
-    end
-    it 'I can see links to delete discounts' do
-      within(".discount-#{@discount1.id}") do
-        expect(page).to have_link("Delete", href: "/merchant/discounts/#{@discount1.id}")
-      end
-
-      within(".discount-#{@discount2.id}") do
-        expect(page).to have_link("Delete", href: "/merchant/discounts/#{@discount2.id}")
-      end
-
-      expect(page).to have_no_link("Delete", href: "/merchant/discounts/#{@discount3.id}")
+      expect(page).to have_no_content("Code: 50OFF")
+      expect(page).to have_no_content("Description: 50% off 10 items or more")
+      expect(page).to have_no_content("Discount: 50%")
+      expect(page).to have_no_content("Number of Items needed: 10")
     end
   end
 end
