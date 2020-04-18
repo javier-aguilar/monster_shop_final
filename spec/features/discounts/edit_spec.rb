@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Index Discount Page' do
+RSpec.describe 'Edit Discount Page' do
   describe 'As a merchant employee' do
     before do
       megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
@@ -31,49 +31,27 @@ RSpec.describe 'Index Discount Page' do
 
        visit merchant_discounts_path
     end
-    it 'I can see a list of discounts' do
+    it 'I can edit a discount by clicking on edit next to a discount on the index page' do
+      within(".discount-#{@discount1.id}") do
+        click_link "Edit"
+      end
+
+      fill_in :code, with: "50OFF"
+      fill_in :description, with: "50% off 5 items or more"
+      fill_in :discount, with: "50"
+      fill_in :number_of_items, with: "5"
+
+      click_button "Update"
+
+      expect(current_path).to eq(merchant_discounts_path)
+
       within(".discount-#{@discount1.id}") do
         expect(page).to have_content("Code: 50OFF")
-        expect(page).to have_content("Description: 50% off 10 items or more")
+        expect(page).to have_content("Description: 50% off 5 items or more")
         expect(page).to have_content("Discount: 50%")
-        expect(page).to have_content("Number of Items needed: 10")
+        expect(page).to have_content("Number of Items needed: 5")
       end
 
-      within(".discount-#{@discount2.id}") do
-        expect(page).to have_content("Code: 60OFF")
-        expect(page).to have_content("Description: 60% off 15 items or more")
-        expect(page).to have_content("Discount: 60%")
-        expect(page).to have_content("Number of Items needed: 15")
-      end
-
-      expect(page).to have_no_content("Code: SUMMER10")
-      expect(page).to have_no_content("Description: 10% off 10 items or more")
-      expect(page).to have_no_content("Discount: 10%")
-    end
-    it 'I can see a link to add a discount' do
-      expect(page).to have_link("Create New Discount", href: "/merchant/discounts/new")
-    end
-    it 'I can see links to edit discounts' do
-      within(".discount-#{@discount1.id}") do
-        expect(page).to have_link("Edit", href: "/merchant/discounts/#{@discount1.id}/edit")
-      end
-
-      within(".discount-#{@discount2.id}") do
-        expect(page).to have_link("Edit", href: "/merchant/discounts/#{@discount2.id}/edit")
-      end
-
-      expect(page).to have_no_link("Edit", href: "/merchant/discounts/#{@discount3.id}/edit")
-    end
-    it 'I can see links to delete discounts' do
-      within(".discount-#{@discount1.id}") do
-        expect(page).to have_link("Delete", href: "/merchant/discounts/#{@discount1.id}")
-      end
-
-      within(".discount-#{@discount2.id}") do
-        expect(page).to have_link("Delete", href: "/merchant/discounts/#{@discount2.id}")
-      end
-
-      expect(page).to have_no_link("Delete", href: "/merchant/discounts/#{@discount3.id}")
     end
   end
 end
