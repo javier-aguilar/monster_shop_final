@@ -10,7 +10,7 @@
     <p>Discount: <%= discount.discount %>%</p>
     <p>Number of Items needed: <%= discount.number_of_items %></p>
     <p>
-      <%= link_to "Edit", "/merchant/discounts/#{discount.id}" %> |
+      <%= link_to "Edit", "/merchant/discounts/#{discount.id}/edit" %> |
       <%= link_to "Delete", "/merchant/discounts/#{discount.id}", method: :delete %>
     </p>
   </section>

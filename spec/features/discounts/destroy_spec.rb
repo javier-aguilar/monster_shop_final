@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Index Discount Page' do
+RSpec.describe 'Delete Discount' do
   describe 'As a merchant employee' do
     before do
       megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
@@ -31,7 +31,7 @@ RSpec.describe 'Index Discount Page' do
 
        visit merchant_discounts_path
     end
-    it 'I can see a list of discounts' do
+    it 'I can delete a discount from the index page' do
       within(".discount-#{@discount1.id}") do
         expect(page).to have_content("Code: 50OFF")
         expect(page).to have_content("Description: 50% off 10 items or more")
