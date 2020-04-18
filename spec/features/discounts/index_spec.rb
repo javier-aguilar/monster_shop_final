@@ -50,6 +50,9 @@ RSpec.describe 'Index Discount Page' do
       expect(page).to have_no_content("Description: 10% off 10 items or more")
       expect(page).to have_no_content("Discount: 10%")
     end
+    it 'I can see a link to add a discount' do
+      expect(page).to have_link("Create New Discount", href: "/merchant/discounts/new")
+    end
     it 'I can also see links to edit discounts' do
       within(".discount-#{@discount1.id}") do
         expect(page).to have_link("Edit", href: "/merchant/discounts/#{@discount1.id}")
