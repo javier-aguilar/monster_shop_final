@@ -12,5 +12,4 @@ RSpec.describe Discount do
     it {should validate_presence_of :number_of_items}
     it {should validate_presence_of :active}
   end
-
 end
