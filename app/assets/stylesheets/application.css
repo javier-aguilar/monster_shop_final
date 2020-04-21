@@ -34,10 +34,6 @@ a:visited {
   text-decoration: none;
 }
 
-a:hover #id{
-  background: none!important;
-}
-
 form {
   padding: 10px;
 }
@@ -85,6 +81,11 @@ form select {
   padding: 5px;
 }
 
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 nav {
   font-size: 15px;
   height: 45px;
@@ -101,6 +102,22 @@ nav a {
   margin-left: 40px;
 }
 
+.content a {
+  padding: 0px;
+  margin-right: 15px;
+  color: #403f3f;
+  text-decoration: none;
+}
+
+.content p > a {
+  margin-right: 0px;
+}
+
+.content a:hover {
+  color: #ffffff;
+  background: #ea4c89;
+}
+
 .logged-as {
   float: right;
 }
@@ -111,6 +128,7 @@ nav a {
 }
 
 .welcome {
+  margin-left: -40px;
   font-size: 80px;
   font-weight: lighter;
 }
