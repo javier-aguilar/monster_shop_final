@@ -1,6 +1,6 @@
 class CartController < ApplicationController
   before_action :exclude_admin
-  
+
   def add_item
     item = Item.find(params[:item_id])
     session[:cart] ||= {}
@@ -19,6 +19,7 @@ class CartController < ApplicationController
 
   def empty
     session.delete(:cart)
+    session.delete(:discount)
     redirect_to '/cart'
   end
 
@@ -37,4 +38,5 @@ class CartController < ApplicationController
     session[:cart] = cart.contents
     redirect_to '/cart'
   end
+
 end

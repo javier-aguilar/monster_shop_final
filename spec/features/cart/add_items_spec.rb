@@ -6,8 +6,9 @@ RSpec.describe "Add Items to Cart" do
       @megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
       @brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
       @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
-      @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
+      @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
+      @discount1 = @megan.discounts.create!(code: "50OFF", description: "50% off 5 items or more", discount: 50, number_of_items: 5, active: true)
     end
 
     it "I can add an item from the items show page" do
@@ -31,6 +32,24 @@ RSpec.describe "Add Items to Cart" do
 
       expect(page).to have_content("#{@giant.name} has been added to your cart!")
       expect(page).to have_content("Cart: 2")
+    end
+    it "If I meet a discount requirement, I will get a bulk discount" do
+
+      visit item_path(@giant)
+      click_button 'Add to Cart'
+
+      visit "/cart"
+
+      within("#item-#{@giant.id}") do
+        4.times do
+          click_button "More of This!"
+        end
+      end
+
+      expect(page).to have_content("Discount '50OFF' has been applied")
+      expect(page).to have_content("Cart: 5")
+
+      expect(page).to have_content("Total: $125.00")
     end
   end
 end
