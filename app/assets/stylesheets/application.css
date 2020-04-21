@@ -20,13 +20,69 @@ body {
 }
 
 a {
-  color: #000000;
+  padding: 5px;
+  color: #403f3f;
   text-decoration: none;
 }
 
+a:hover {
+  color: #ffffff;
+  background: #ea4c89;
+}
+
 a:visited {
-  color: #000000;
   text-decoration: none;
+}
+
+a:hover #id{
+  background: none!important;
+}
+
+form {
+  padding: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+form input{
+  display: block;
+  border: 1px solid grey;
+  min-height: 20px;
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+form input[type=submit] {
+  font-size: 14px;
+  padding-top: 10px;
+  border: 1px solid black;
+  width: 210px;
+}
+
+form input[type=submit]:hover {
+  width: 210px;
+  text-decoration: none;
+}
+
+form input[type=checkbox]{
+  display: inline;
+  width: auto;
+  margin-top: 20px;
+}
+
+form select {
+  display: block;
+  border: 1px solid grey;
+  font-size: 16px;
+  min-height: 20px;
+  width: 200px;
+  margin-top: 5px;
+  padding: 5px;
 }
 
 nav {
@@ -40,9 +96,9 @@ nav a {
   padding: 15px;
 }
 
-nav a:hover {
-  color: #ffffff;
-  background: #ea4c89;
+.content {
+  margin-top: 40px;
+  margin-left: 40px;
 }
 
 .logged-as {

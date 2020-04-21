@@ -15,16 +15,17 @@
     <p><%= item.description %></p>
     <%= link_to(image_tag(item.image), item_path(item), id: 'image') %>
     <p>Price: <%= number_to_currency(item.price) %></p>
-    <p>Sold by: <%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %>, Inventory: <%= item.inventory %></p>
-    <p><%= item.active ? "Active" : "Inactive" %></p>
+    <p>Sold by: <%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></p>
+    <p>Inventory: <%= item.inventory %></p>
+    <p>Status: <%= item.active ? "Active" : "Inactive" %></p>
     <% if current_merchant_user? %>
       <% if item.active? %>
         <%= button_to 'Inactivate', "/merchant/items/#{item.id}/change_status", method: :put %>
       <% elsif !item.active? %>
         <%= button_to 'Activate', "/merchant/items/#{item.id}/change_status", method: :put %>
       <% end %>
-      <%= link_to 'Update Item', "/merchant/items/#{item.id}/edit" %>
       <%= button_to 'Delete', "/merchant/items/#{item.id}", method: :delete if item.orders.empty? %>
+      <%= link_to 'Update Item', "/merchant/items/#{item.id}/edit" %>
     <% end %>
   </section>
 <% end %>

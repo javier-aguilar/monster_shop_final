@@ -28,9 +28,11 @@
       <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin?%>
       <%= link_to 'Log Out', logout_path if current_user%>
     </nav>
-    <% flash.each do |type, message| %>
-    <p><%= message %></p>
-    <% end %>
-    <%= yield %>
+    <section class = "content">
+      <% flash.each do |type, message| %>
+      <p><%= message %></p>
+      <% end %>
+      <%= yield %>
+    </section>
   </body>
 </html>
