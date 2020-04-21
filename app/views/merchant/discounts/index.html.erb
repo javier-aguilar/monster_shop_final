@@ -1,0 +1,19 @@
+<h1>Discounts</h1>
+
+<%= link_to "Create New Discount", "/merchant/discounts/new" %>
+<section>
+  <% @discounts.each do |discount| %>
+  <section class = "discount-<%= discount.id %>">
+    <h2>Discount #<%= discount.id %></h2>
+    <p>Code: <%= discount.code %></p>
+    <p>Description: <%= discount.description %></p>
+    <p>Discount: <%= discount.discount %>%</p>
+    <p>Number of Items needed: <%= discount.number_of_items %></p>
+    <p>Status: <%= discount.active ? "Active" : "Inactive" %></p>
+    <p>
+      <%= link_to "Edit", "/merchant/discounts/#{discount.id}/edit" %> |
+      <%= link_to "Delete", "/merchant/discounts/#{discount.id}", method: :delete %>
+    </p>
+  </section>
+  <% end %>
+</section>

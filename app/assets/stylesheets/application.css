@@ -13,3 +13,122 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+a {
+  padding: 5px;
+  color: #403f3f;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  background: #ea4c89;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+form {
+  padding: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+form input{
+  display: block;
+  border: 1px solid grey;
+  min-height: 20px;
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+form input[type=submit] {
+  font-size: 14px;
+  margin-top: 20px;
+  border: 1px solid black;
+  width: 210px;
+}
+
+form input[type=submit]:hover {
+  width: 210px;
+  text-decoration: none;
+}
+
+form input[type=checkbox]{
+  display: inline;
+  width: auto;
+  margin-top: 20px;
+}
+
+form select {
+  display: block;
+  border: 1px solid grey;
+  font-size: 16px;
+  min-height: 20px;
+  width: 200px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+nav {
+  font-size: 15px;
+  height: 45px;
+  margin: 20px 30px 0 30px;
+  box-shadow: inset 0px -1px 0px #f3f3f4;
+}
+
+nav a {
+  padding: 15px;
+}
+
+.content {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.content a {
+  padding: 0px;
+  margin-right: 15px;
+  color: #403f3f;
+  text-decoration: none;
+}
+
+.content p > a {
+  margin-right: 0px;
+}
+
+.content a:hover {
+  color: #ffffff;
+  background: #ea4c89;
+}
+
+.logged-as {
+  float: right;
+}
+
+.underline {
+  font-weight: 900;
+  border-bottom: 5px solid #ea4c89;
+}
+
+.welcome {
+  margin-left: -40px;
+  font-size: 80px;
+  font-weight: lighter;
+}

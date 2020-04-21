@@ -1,0 +1,19 @@
+<%= form_for discount, url: path do |f| %>
+  <%= f.label :code %>
+  <%= f.text_field :code, :value => @discount.code %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, :value => @discount.description %>
+
+  <%= f.label :discount %>
+  <%= f.number_field :discount, :value => @discount.discount %>
+
+  <%= f.label :number_of_items %>
+  <%= f.number_field :number_of_items, :value => @discount.number_of_items %>
+
+  <%= f.label :active %>
+  <%= f.select :active, ['', 'True', 'False'], :selected => @discount.active.to_s.capitalize %>
+
+
+  <%= f.submit submit_text %>
+<% end %>

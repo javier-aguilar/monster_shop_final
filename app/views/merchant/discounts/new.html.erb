@@ -1,0 +1,9 @@
+<h1>Create New Discount</h1>
+
+<center>
+  <%= render partial: 'form', locals: {
+        path: merchant_discounts_path,
+        discount: @discount,
+        submit_text: "Create Discount"
+      } %>
+</center>

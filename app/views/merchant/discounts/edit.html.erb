@@ -1,0 +1,9 @@
+<h1>Edit Discount #<%= @discount.id %></h1>
+
+<center>
+  <%= render partial: 'form', locals: {
+        path: "/merchant/discounts/#{@discount.id}",
+        discount: @discount,
+        submit_text: "Update"
+      } %>
+</center>
