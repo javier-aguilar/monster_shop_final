@@ -6,6 +6,4 @@ class Discount < ApplicationRecord
                         :discount,
                         :number_of_items,
                         :active
-
-
 end

@@ -10,6 +10,7 @@ RSpec.describe 'Create Order' do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @user = User.create!(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword')
+      @discount1 = @megan.discounts.create!(code: "50OFF", description: "50% off 5 items or more", discount: 50, number_of_items: 5, active: true)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
@@ -33,6 +34,28 @@ RSpec.describe 'Create Order' do
 
       within "#order-#{order.id}" do
         expect(page).to have_link("#{order.id}")
+      end
+    end
+    it 'I can click a link to get to create an order with a discount' do
+      5.times do
+        visit item_path(@ogre)
+        click_button 'Add to Cart'
+      end
+
+      visit '/cart'
+      expect(page).to have_content('Total: $50.00')
+
+      click_button 'Check Out'
+
+      order = Order.last
+
+      expect(current_path).to eq('/profile/orders')
+      expect(page).to have_content('Order created successfully!')
+      expect(page).to have_link('Cart: 0')
+
+      within "#order-#{order.id}" do
+        expect(page).to have_link("#{order.id}")
+        expect(page).to have_content('$50.00')
       end
     end
   end
