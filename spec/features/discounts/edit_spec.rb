@@ -52,7 +52,26 @@ RSpec.describe 'Edit Discount Page' do
         expect(page).to have_content("Discount: 50%")
         expect(page).to have_content("Number of Items needed: 5")
       end
+    end
+    it 'I can edit a discount by clicking on edit next to a discount on the index page
+        However, if I do not fill out all information, I will get an error' do
+      within(".discount-#{@discount1.id}") do
+        click_link "Edit"
+      end
 
+      fill_in "discount[code]", with: ""
+      fill_in "discount[description]", with: ""
+      fill_in "discount[discount]", with: ""
+      fill_in "discount[number_of_items]", with: ""
+      select ""
+
+      click_button "Update"
+
+      expect(page).to have_content("Code can't be blank")
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Discount can't be blank")
+      expect(page).to have_content("Number of items can't be blank")
+      expect(page).to have_content("Active can't be blank")
     end
   end
 end

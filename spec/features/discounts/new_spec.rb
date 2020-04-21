@@ -49,5 +49,24 @@ RSpec.describe 'New Discount Creation' do
       end
 
     end
+    it 'I can visit /discounts/new to fill out a form to create a new discount
+        However, if I do not fill out all information, I will get an error' do
+
+      visit new_merchant_discount_path
+
+      fill_in "discount[code]", with: ""
+      fill_in "discount[description]", with: ""
+      fill_in "discount[discount]", with: ""
+      fill_in "discount[number_of_items]", with: ""
+      select ""
+
+      click_button "Create Discount"
+
+      expect(page).to have_content("Code can't be blank")
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Discount can't be blank")
+      expect(page).to have_content("Number of items can't be blank")
+      expect(page).to have_content("Active can't be blank")
+    end
   end
 end
