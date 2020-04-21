@@ -47,23 +47,22 @@ class Cart
 
   def min_num_of_items?(item)
     quantity = @contents[item.id.to_s]
-    minimum = Discount.where(merchant_id: item.merchant.id).minimum(:number_of_items)
-    minimum.nil? ? false : quantity >= minimum
+    minimum = discount(item)
+    minimum.nil? ? false : quantity >= minimum.number_of_items
   end
 
   def discount(item)
     Discount.where(merchant_id: item.merchant.id)
             .where("number_of_items <= ?", self.count_of(item.id))
-            .maximum(:discount)
+            .order(discount: :desc).first
   end
 
   def discount_price(item)
-    item.price - (item.price * (discount(item) / 100.00))
+    item.price - (item.price * (discount(item).discount / 100.00))
   end
 
   def display_discount(item)
-    discount = Discount.where(merchant_id: item.merchant.id, discount: discount(item))
-    "Discount '#{discount.first.code}' has been applied" if min_num_of_items?(item)
+    "Discount '#{discount(item).code}' has been applied" if min_num_of_items?(item)
   end
 
 end

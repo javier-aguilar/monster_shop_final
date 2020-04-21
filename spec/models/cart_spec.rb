@@ -78,7 +78,7 @@ RSpec.describe Cart do
       4.times do
         @cart.add_item(@ogre.id.to_s)
       end
-      expect(@cart.discount(@ogre)).to eq(50)
+      expect(@cart.discount(@ogre).discount).to eq(50)
     end
     it '.discount_price()' do
       4.times do
