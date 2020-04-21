@@ -64,9 +64,25 @@ RSpec.describe 'New Discount Creation' do
 
       expect(page).to have_content("Code can't be blank")
       expect(page).to have_content("Description can't be blank")
-      expect(page).to have_content("Discount can't be blank")
+      expect(page).to have_content("Discount is not a number")
       expect(page).to have_content("Number of items can't be blank")
       expect(page).to have_content("Active can't be blank")
+    end
+    it 'I can visit /discounts/new to fill out a form to create a new discount
+        However, if I fill in a number in discount field not between 1-100, I will get an error' do
+      visit new_merchant_discount_path
+
+      fill_in "discount[discount]", with: "0"
+
+      click_button "Create Discount"
+
+      expect(page).to have_content("Discount must be greater than or equal to 1")
+
+      fill_in "discount[discount]", with: "9999"
+
+      click_button "Create Discount"
+
+      expect(page).to have_content("Discount must be less than or equal to 100")
     end
   end
 end

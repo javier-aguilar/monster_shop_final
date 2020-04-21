@@ -3,7 +3,8 @@ class Discount < ApplicationRecord
 
   validates_presence_of :code,
                         :description,
-                        :discount,
                         :number_of_items,
                         :active
+  validates :discount,
+    :numericality => { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
 end

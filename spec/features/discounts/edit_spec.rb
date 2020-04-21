@@ -69,7 +69,7 @@ RSpec.describe 'Edit Discount Page' do
 
       expect(page).to have_content("Code can't be blank")
       expect(page).to have_content("Description can't be blank")
-      expect(page).to have_content("Discount can't be blank")
+      expect(page).to have_content("Discount is not a number")
       expect(page).to have_content("Number of items can't be blank")
       expect(page).to have_content("Active can't be blank")
     end
