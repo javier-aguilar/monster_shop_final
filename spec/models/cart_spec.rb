@@ -60,34 +60,37 @@ RSpec.describe Cart do
       expect(@cart.count_of(@giant.id)).to eq(1)
     end
     it '.apply_discount()' do
-      expect(@cart.apply_discount(@ogre.id, 20, @cart.count_of(@ogre.id))).to eq(20)
+      expect(@cart.apply_discount(@ogre)).to eq(20)
       4.times do
         @cart.add_item(@ogre.id.to_s)
       end
-      expect(@cart.apply_discount(@ogre.id, 20, @cart.count_of(@ogre.id))).to eq(50)
+      expect(@cart.apply_discount(@ogre)).to eq(50)
     end
     it '.min_num_of_items?()' do
-      expect(@cart.min_num_of_items?(@ogre.id, 4)).to eq(false)
-      expect(@cart.min_num_of_items?(@ogre.id, 5)).to eq(true)
-    end
-    it '.discount()' do
-      expect(@cart.discount(@ogre.id)).to eq(nil)
+      expect(@cart.min_num_of_items?(@ogre)).to eq(false)
       4.times do
         @cart.add_item(@ogre.id.to_s)
       end
-      expect(@cart.discount(@ogre.id)).to eq(50)
+      expect(@cart.min_num_of_items?(@ogre)).to eq(true)
+    end
+    it '.discount()' do
+      expect(@cart.discount(@ogre)).to eq(nil)
+      4.times do
+        @cart.add_item(@ogre.id.to_s)
+      end
+      expect(@cart.discount(@ogre)).to eq(50)
     end
     it '.discount_price()' do
       4.times do
         @cart.add_item(@ogre.id.to_s)
       end
-      expect(@cart.discount_price(@ogre.id, 20)).to eq(10)
+      expect(@cart.discount_price(@ogre)).to eq(10)
     end
     it '.display_discount()' do
       4.times do
         @cart.add_item(@ogre.id.to_s)
       end
-      expect(@cart.display_discount(@ogre.id, 5)).to eq("Discount '#{@discount1.code}' has been applied")
+      expect(@cart.display_discount(@ogre)).to eq("Discount '#{@discount1.code}' has been applied")
     end
   end
 end
