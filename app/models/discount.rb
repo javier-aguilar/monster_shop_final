@@ -4,6 +4,8 @@ class Discount < ApplicationRecord
   validates_presence_of :code,
                         :description,
                         :discount,
-                        :number_of_items
+                        :number_of_items,
+                        :active
+
 
 end

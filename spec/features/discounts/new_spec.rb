@@ -30,10 +30,11 @@ RSpec.describe 'New Discount Creation' do
 
       visit new_merchant_discount_path
 
-      fill_in :code, with: "50OFF"
-      fill_in :description, with: "50% off 10 items or more"
-      fill_in :discount, with: "50"
-      fill_in :number_of_items, with: "10"
+      fill_in "discount[code]", with: "50OFF"
+      fill_in "discount[description]", with: "50% off 10 items or more"
+      fill_in "discount[discount]", with: "50"
+      fill_in "discount[number_of_items]", with: "10"
+      select "True"
 
       click_button "Create Discount"
 

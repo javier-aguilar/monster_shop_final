@@ -8,9 +8,9 @@ RSpec.describe 'Edit Discount Page' do
       megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
-      @discount1 = megan.discounts.create!(code: "50OFF", description: "50% off 10 items or more", discount: 50, number_of_items: 10)
-      @discount2 = megan.discounts.create!(code: "60OFF", description: "60% off 15 items or more", discount: 60, number_of_items: 15)
-      @discount3 = brian.discounts.create!(code: "SUMMER10", description: "10% off 10 items or more", discount: 10, number_of_items: 10)
+      @discount1 = megan.discounts.create!(code: "50OFF", description: "50% off 10 items or more", discount: 50, number_of_items: 10, active: true)
+      @discount2 = megan.discounts.create!(code: "60OFF", description: "60% off 15 items or more", discount: 60, number_of_items: 15, active: true)
+      @discount3 = brian.discounts.create!(code: "SUMMER10", description: "10% off 10 items or more", discount: 10, number_of_items: 10, active: true)
 
       employee = User.create(name: "Mike Dao",
            address: "1765 Larimer St",
@@ -36,10 +36,11 @@ RSpec.describe 'Edit Discount Page' do
         click_link "Edit"
       end
 
-      fill_in :code, with: "50OFF"
-      fill_in :description, with: "50% off 5 items or more"
-      fill_in :discount, with: "50"
-      fill_in :number_of_items, with: "5"
+      fill_in "discount[code]", with: "50OFF"
+      fill_in "discount[description]", with: "50% off 5 items or more"
+      fill_in "discount[discount]", with: "50"
+      fill_in "discount[number_of_items]", with: "5"
+      select "True"
 
       click_button "Update"
 

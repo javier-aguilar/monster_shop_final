@@ -1,19 +1,9 @@
 <h1>Edit Discount #<%= @discount.id %></h1>
 
 <center>
-  <%= form_tag "/merchant/discounts/#{@discount.id}", method: :put do %>
-    <%= label_tag :code %>
-    <%= text_field_tag :code, @discount.code %>
-
-    <%= label_tag :description %>
-    <%= text_field_tag :description, @discount.description %>
-
-    <%= label_tag :discount %>
-    <%= number_field_tag :discount, @discount.discount %>
-
-    <%= label_tag :number_of_items %>
-    <%= number_field_tag :number_of_items, @discount.number_of_items %>
-
-    <%= submit_tag 'Update' %>
-  <% end %>
+  <%= render partial: 'form', locals: {
+        path: "/merchant/discounts/#{@discount.id}",
+        discount: @discount,
+        submit_text: "Update"
+      } %>
 </center>

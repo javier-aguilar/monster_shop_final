@@ -1,19 +1,9 @@
 <h1>Create New Discount</h1>
 
 <center>
-  <%= form_for @discount, url: merchant_discounts_path do |f| %>
-    <%= f.label :code %>
-    <%= f.text_field :code%>
-
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-
-    <%= f.label :discount %>
-    <%= f.number_field :discount %>
-
-    <%= f.label :number_of_items %>
-    <%= f.number_field :number_of_items %>
-
-    <%= f.submit 'Create Discount' %>
-  <% end %>
+  <%= render partial: 'form', locals: {
+        path: merchant_discounts_path,
+        discount: @discount,
+        submit_text: "Create Discount"
+      } %>
 </center>
